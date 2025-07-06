@@ -5,10 +5,9 @@ import { useState } from "react";
 import Modal from "./Modal.component";
 
 const PostsList = (props) => {
-  const { data } = props;
+  const { data, isModalVisible, hideModalHandler } = props;
   const [name, setName] = useState("SBH");
   const [content, setContent] = useState("Content test!");
-  const [isModalVisible, setIsModalVisible] = useState(true);
 
   const onNameChangeHandler = (event) => {
     setName(event.target.value);
@@ -16,10 +15,6 @@ const PostsList = (props) => {
 
   const onContentChangeHandler = (event) => {
     setContent(event.target.value);
-  };
-
-  const hideModalHandler = () => {
-    setIsModalVisible(false);
   };
 
   return (
