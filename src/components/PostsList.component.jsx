@@ -1,20 +1,15 @@
 import Post from "./Post.component";
 import NewPost from "./NewPost.component";
-import styles from "./PostsList.module.css";
+import * as styles from "./PostsList.module.css";
 import { useState } from "react";
 import Modal from "./Modal.component";
 
 const PostsList = (props) => {
-  const { data, isModalVisible, hideModalHandler } = props;
-  const [name, setName] = useState("SBH");
-  const [content, setContent] = useState("Content test!");
+  const { isModalVisible, hideModalHandler } = props;
+  const [posts, setPosts] = useState([]);
 
-  const onNameChangeHandler = (event) => {
-    setName(event.target.value);
-  };
-
-  const onContentChangeHandler = (event) => {
-    setContent(event.target.value);
+  const addPostHandler = (post) => {
+    setPosts((previousPosts) => [...previousPosts, post]);
   };
 
   return (
@@ -22,18 +17,22 @@ const PostsList = (props) => {
       {isModalVisible && (
         <Modal hideModalHandler={hideModalHandler}>
           <NewPost
-            setName={onNameChangeHandler}
-            setContent={onContentChangeHandler}
+            hideModalHandler={hideModalHandler}
+            addPostHandler={addPostHandler}
           />
         </Modal>
       )}
 
+      {!posts?.length && (
+        <div style={{ textAlign: "center", color: "white" }}>
+          <h2>There are no posts yet.</h2>
+          <p>Add some !</p>
+        </div>
+      )}
+
       <ul className={styles.posts}>
-        <li>
-          <Post name={name} content={content} />
-        </li>
-        {data.map((item) => (
-          <li>
+        {posts.map((item) => (
+          <li key={item.content}>
             <Post name={item.name} content={item.content} />
           </li>
         ))}
