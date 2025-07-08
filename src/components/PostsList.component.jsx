@@ -1,7 +1,7 @@
 import Post from "./Post.component";
 import NewPost from "./NewPost.component";
 import * as styles from "./PostsList.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "./Modal.component";
 
 const PostsList = (props) => {
@@ -18,6 +18,16 @@ const PostsList = (props) => {
     });
     setPosts((previousPosts) => [...previousPosts, post]);
   };
+
+  useEffect(() => {
+    const getPosts = async () => {
+      const response = await fetch("http://localhost:8080/posts");
+      const data = await response.json();
+      setPosts(data.posts);
+    };
+
+    getPosts();
+  }, []);
 
   return (
     <>
