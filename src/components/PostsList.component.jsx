@@ -9,6 +9,13 @@ const PostsList = (props) => {
   const [posts, setPosts] = useState([]);
 
   const addPostHandler = (post) => {
+    fetch("http://localhost:8080/posts", {
+      method: "POST",
+      body: JSON.stringify(post),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     setPosts((previousPosts) => [...previousPosts, post]);
   };
 
