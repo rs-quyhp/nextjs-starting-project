@@ -1,8 +1,7 @@
-import Post from "./Post.component";
-import NewPost from "./NewPost.component";
-import * as styles from "./PostsList.module.css";
 import { useEffect, useState } from "react";
-import Modal from "./Modal.component";
+import NewPost from "../routes/NewPost.component";
+import Post from "./Post.component";
+import * as styles from "./PostsList.module.css";
 
 const PostsList = (props) => {
   const { isModalVisible, hideModalHandler } = props;
@@ -35,12 +34,10 @@ const PostsList = (props) => {
   return (
     <>
       {isModalVisible && (
-        <Modal hideModalHandler={hideModalHandler}>
-          <NewPost
-            hideModalHandler={hideModalHandler}
-            addPostHandler={addPostHandler}
-          />
-        </Modal>
+        <NewPost
+          hideModalHandler={hideModalHandler}
+          addPostHandler={addPostHandler}
+        />
       )}
 
       {!isFetching && !posts?.length && (
