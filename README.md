@@ -1,1 +1,1 @@
-# Next.JS React Learning
+# React.JS Learning
